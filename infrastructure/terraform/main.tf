@@ -91,8 +91,8 @@ module "api" {
     ingest = {
       binary = "${path.module}/../../target/lambda/biopticon-probe/bootstrap"
       routes = [
-        { priority = 380, paths = ["/health"], methods = ["GET"], authenticated = false },
-        { priority = 381, paths = ["/v1/runs/*/events/*"], methods = ["PUT"], authenticated = true }
+        { priority = 390, paths = ["/health"], methods = ["GET"], authenticated = false },
+        { priority = 391, paths = ["/v1/runs/*/events/*"], methods = ["PUT"], authenticated = true }
       ]
     }
   }
