@@ -1,0 +1,32 @@
+name: Probe CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: '21'}
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - run: make android-check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: biopticon-probe-debug
+          path: android/apps/probe/build/outputs/apk/debug/*.apk
+  ci:
+    needs: [android]
+    permissions:
+      contents: read
+      id-token: write
+    uses: chris-arsenault/ahara/.github/workflows/ci.yml@main
+    with:
+      rust_extra_ci_commands: cargo test --locked --workspace
+    secrets: inherit

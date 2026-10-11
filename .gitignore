@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.sulion-paste/
+.gradle/
+**/build/
+**/target/
+**/.terraform/
+*.tfstate*
+*.tfplan
+local.properties
+.local/
+*.jks
+*.keystore

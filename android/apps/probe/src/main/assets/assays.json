@@ -1,0 +1,2216 @@
+[
+  {
+    "id": "P-01",
+    "mode": "R",
+    "question": "Inventory Android, SDK and Health Connect versions, model family, locale, timezone and visible Hume/Garmin app versions.",
+    "route": "inventory",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run campaign; visible package versions and intent handlers. App account-linked state still requires inspection in its UI.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-02",
+    "mode": "G",
+    "question": "Compare the phone clock with a trusted reference and inspect source timestamp precision and timezone behavior.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-03",
+    "mode": "G",
+    "question": "Restart or terminate the probe and verify that committed observations remain inspectable and incomplete runs are identified.",
+    "route": "recovery",
+    "optional": false,
+    "account_write": false,
+    "implementation": "local_verification_and_phone",
+    "prerequisite": "Build tests cover durable queue/recovery. Force-stop/offline/Doze and real S3 delivery must be observed on the phone and deployment.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-04",
+    "mode": "G",
+    "question": "Reboot, force-stop, change networks or enter battery saver; observe queued-event recovery and background scheduling delays.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-05",
+    "mode": "R",
+    "question": "Inspect granted permissions against the selected read types; verify that unrelated probes continue after a denial.",
+    "route": "permissions",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant only chosen read group; campaign enumerates actual grants and confirms manifest has no health writes. Revoke/regrant is an owner action.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-06",
+    "mode": "G",
+    "question": "Run with status delivery unavailable, inspect local observations, reconnect and verify that queued events reach S3.",
+    "route": "delivery",
+    "optional": false,
+    "account_write": false,
+    "implementation": "deployment_required",
+    "prerequisite": "Configure deployed API and Cognito client, sign in, run offline, reconnect and inspect individual S3 events. Deployment must precede this test.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "P-07",
+    "mode": "G",
+    "question": "Select a source CSV/FIT through the system picker and test URI permission availability and revocation.",
+    "route": "artifact",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-01",
+    "mode": "R",
+    "question": "Check Health Connect availability, SDK status and runtime feature flags.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-02",
+    "mode": "G",
+    "question": "Grant, partially grant, deny and revoke selected read permissions; observe each affected record type.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-03",
+    "mode": "R",
+    "question": "Read each granted relevant type over 7-day and 30-day windows; record counts, origins and query outcomes.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-04",
+    "mode": "G",
+    "question": "Grant history access and test reads beyond 30 days.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-05",
+    "mode": "G",
+    "question": "Grant background access, close the UI during a campaign and inspect actual read outcomes and execution context.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-06",
+    "mode": "R",
+    "question": "Vary page sizes and inspect terminal page tokens, pagination limits and quota errors.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-07",
+    "mode": "R",
+    "question": "Compare unfiltered and per-origin reads; distinguish the source app from the physical recording device.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-08",
+    "mode": "R",
+    "question": "Inspect available record metadata: IDs, versions, modification time, recording method, device and origin. Keep identifiers local.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-09",
+    "mode": "R",
+    "question": "Discover accessible body measurement fields, types, units and presence across weight, fat, bone, lean mass, water, height and basal metabolism.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-10",
+    "mode": "R",
+    "question": "Discover enabled exercise, steps, distance, calories, heart rate, elevation, speed and sleep fields and associations.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-11",
+    "mode": "G",
+    "question": "Request exercise route access separately; distinguish an absent route from denied permission without uploading coordinates.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-12",
+    "mode": "G",
+    "question": "For a Garmin hike, inspect whether elevation records can be associated with its exercise session by time and source.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-13",
+    "mode": "R",
+    "question": "Compare raw records and aggregate totals on overlapping sources; inspect source priority and possible double counting.",
+    "route": "health-aggregate",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Enable activity reads. Compare seven-day raw steps with aggregation; other aggregate families require a subsequent targeted case.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-14",
+    "mode": "G",
+    "question": "After a real Hume weigh-in, repeat bounded reads at selected intervals and observe arrival and modification timing.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-15",
+    "mode": "G",
+    "question": "After a real repeat measurement or correction, inspect identity, version, update, deletion and late-arrival behavior.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-16",
+    "mode": "R",
+    "question": "Test changes-token creation and subsequent reads; inspect expiry, pagination and recovery requirements.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-17",
+    "mode": "G",
+    "question": "Inspect source units and missing or sentinel fields in an actual sample; compare conversions locally.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-18",
+    "mode": "R",
+    "question": "Distinguish readable empty types from unavailable or permission-denied types.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-19",
+    "mode": "G",
+    "question": "Revoke permissions, restart and regrant; observe partial operation and recovery.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-20",
+    "mode": "R",
+    "question": "Inspect write permissions and observed data origins; identify possible export loops without writing records back.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-21",
+    "mode": "R",
+    "question": "Inspect Alpha-origin exercise segments for repetitions, indices, weight, RPE, timing and absent fields.",
+    "route": "health",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-22",
+    "mode": "R",
+    "question": "Compare SDK/runtime feature availability with observed segment fields to separate version limits from source omissions.",
+    "route": "health",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-23",
+    "mode": "G",
+    "question": "Complete a real Alpha workout and compare its UI with newly available Health Connect sessions and segments.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-24",
+    "mode": "R",
+    "question": "Distinguish permission-denied queries from successful empty queries for the selected types.",
+    "route": "health",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HC-25",
+    "mode": "G",
+    "question": "Edit a completed Alpha workout and observe whether Health Connect segments update, replace or remain unchanged.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-01",
+    "mode": "R",
+    "question": "Discover the installed Hume version and actual Health Connect origins; installation alone does not establish export support.",
+    "route": "inventory",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run campaign; visible package versions and intent handlers. App account-linked state still requires inspection in its UI.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-02",
+    "mode": "G",
+    "question": "Inventory fields displayed by Hume: names, units, precision, derived scores and whole-body or segmental scope.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-03",
+    "mode": "G",
+    "question": "Compare each Hume-displayed field with obtainable Health Connect fields and identify missing acquisition paths.",
+    "route": "guided-crosswalk",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-04",
+    "mode": "G",
+    "question": "Compare a real Body Pod scan with its Health Connect representation, timestamp, version and arrival latency locally.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-05",
+    "mode": "G",
+    "question": "Compare two real scans before and after Hume sync for changing fields, rounding and export behavior.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-06",
+    "mode": "G",
+    "question": "If desired, sign out of Hume or go offline and observe which functions survive and recover on reconnect.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-07",
+    "mode": "G",
+    "question": "Inspect export/share mechanisms in the installed Hume app and the structure of actual obtainable exports.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-08",
+    "mode": "G",
+    "question": "Investigate documented Hume Health access and authentication options; distinguish undocumented access from demonstrated failure.",
+    "route": "research",
+    "optional": false,
+    "account_write": false,
+    "implementation": "research_or_follow_up",
+    "prerequisite": "Read the full question and inspect official documentation or phone evidence. Not automatically executed by this APK; record exact observations using the guided stage controls.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-09",
+    "mode": "G",
+    "question": "Scan near the selected scale and inspect advertisement service UUIDs, manufacturer-data types and discovery timing.",
+    "route": "ble-scan",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_opt_in",
+    "prerequisite": "Grant Bluetooth permission, enable scan consent, scan 12 seconds. Select your own scale from local results; no addresses or raw packets leave the device.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-10",
+    "mode": "G",
+    "question": "With Hume disconnected, enumerate the selected scale's GATT services, characteristics, properties and connection errors.",
+    "route": "ble-gatt",
+    "optional": false,
+    "account_write": false,
+    "implementation": "conditional",
+    "prerequisite": "Select your scale after disconnecting Hume. First APK enumerates UUIDs/properties only; safe characteristic-specific reads require observed service definitions and a follow-up probe.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-11",
+    "mode": "G",
+    "question": "After service definitions are known, test permitted characteristic reads and distinguish readable, notify-only, encrypted or pairing-required interfaces.",
+    "route": "ble-gatt",
+    "optional": false,
+    "account_write": false,
+    "implementation": "conditional",
+    "prerequisite": "Select your scale after disconnecting Hume. First APK enumerates UUIDs/properties only; safe characteristic-specific reads require observed service definitions and a follow-up probe.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-12",
+    "mode": "G",
+    "question": "If needed, collect an explicitly selected local Bluetooth diagnostic capture for a focused follow-up investigation.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-13",
+    "mode": "G",
+    "question": "With an established authorized Hume cloud route, inspect authentication, field inventory, history, pagination and errors.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "HM-14",
+    "mode": "G",
+    "question": "Identify each Hume body-composition field's observable source, units and provenance without assuming equivalent measurements.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-01",
+    "mode": "R",
+    "question": "Inventory Garmin Connect version and visible local connection state; distinguish it from cloud authentication.",
+    "route": "inventory",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run campaign; visible package versions and intent handlers. App account-linked state still requires inspection in its UI.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-02",
+    "mode": "G",
+    "question": "Investigate actual Garmin import/export interfaces and their documented or unofficial access requirements.",
+    "route": "research",
+    "optional": false,
+    "account_write": false,
+    "implementation": "research_or_follow_up",
+    "prerequisite": "Read the full question and inspect official documentation or phone evidence. Not automatically executed by this APK; record exact observations using the guided stage controls.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-03",
+    "mode": "G",
+    "question": "Using an established authorized Garmin authentication route, observe login, MFA, issuance, refresh, expiry, logout and errors without recording secrets.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-07",
+    "mode": "G/W",
+    "question": "With separate approval of the account, timestamp and fields, attempt one real Hume-derived measurement import.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-08",
+    "mode": "G/W",
+    "question": "During an approved import, observe transport response, interface, acceptance and time to visibility.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-09",
+    "mode": "G",
+    "question": "Read an imported measurement through UI, export or an authorized interface; distinguish acceptance, storage and display.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-10",
+    "mode": "G/W",
+    "question": "With separately approved real inputs, test which body-composition fields Garmin retains, rounds, ignores or exposes.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-11",
+    "mode": "G",
+    "question": "Observe whether imported weight or body fat reaches the watch profile and how long it takes.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-12",
+    "mode": "G",
+    "question": "Observe whether Garmin re-exports imported body measurements to Health Connect and identify their origins.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-13",
+    "mode": "G/W",
+    "question": "With approval for a repeated import, inspect duplicate/conflict responses and stored record counts.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-14",
+    "mode": "G/W",
+    "question": "With an approved correction case, observe overwrite, coexistence and backdated-import behavior.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-15",
+    "mode": "G",
+    "question": "With an established vendor auth route, inspect expired/revoked sessions, challenges and HTTP errors using bounded requests.",
+    "route": "protocol",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Select known vendor endpoint; GET/HEAD/OPTIONS without credentials. Observe status/challenge/methods. Expired vendor tokens, refresh and MFA require an established authorized vendor auth route.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-16",
+    "mode": "G",
+    "question": "Determine which submitted FIT fields Garmin actually accepts, retains, exposes and re-exports.",
+    "route": "guided-readback",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-17",
+    "mode": "G",
+    "question": "Inspect timestamp precision, timezone handling, backfill ordering and source attribution in actual Garmin results.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GA-18",
+    "mode": "G/W",
+    "question": "If separately approved, test a proprietary developer field and observe retention and display without assuming support.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GI-01",
+    "mode": "R",
+    "question": "Inventory source apps and data paths actually visible on this phone.",
+    "route": "inventory",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run campaign; visible package versions and intent handlers. App account-linked state still requires inspection in its UI.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GI-02",
+    "mode": "G",
+    "question": "Trace a selected attribute's source, intermediate type/origin and destination behavior; record each unknown boundary.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GI-03",
+    "mode": "G",
+    "question": "Inspect independent record timelines and whether related records can be associated by time and origin.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GI-04",
+    "mode": "G",
+    "question": "For a selected provider interface, observe authentication challenges, methods and authorized login stages.",
+    "route": "protocol",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Select known vendor endpoint; GET/HEAD/OPTIONS without credentials. Observe status/challenge/methods. Expired vendor tokens, refresh and MFA require an established authorized vendor auth route.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GI-05",
+    "mode": "G",
+    "question": "Compare repeated source reads or exports after a correction, delay or deletion; inspect identities, fingerprints and query limits.",
+    "route": "health-snapshot",
+    "optional": false,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run the same selected query before and after a source change. Local identity/content hashes yield window diffs; missing records are not proof of deletion.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-01",
+    "mode": "R",
+    "question": "Discover Alpha's installed version and actual Health Connect origins.",
+    "route": "inventory",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Run campaign; visible package versions and intent handlers. App account-linked state still requires inspection in its UI.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-02",
+    "mode": "R",
+    "question": "Inventory Alpha-origin exercise sessions and distinguish summaries from set-level fields.",
+    "route": "health",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-03",
+    "mode": "R",
+    "question": "Inspect Alpha exercise segment fields and distinguish missing data from inaccessible SDK/runtime features.",
+    "route": "health",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Grant selected types and run campaign. Bounded reads discover SDK fields, presence and origins; real source changes/latency require repeated phone passes.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-04",
+    "mode": "G",
+    "question": "Complete a real Alpha workout and compare its UI with Health Connect session and segment fields.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-05",
+    "mode": "G",
+    "question": "Select an actual Alpha CSV export and inspect headers, row counts, encoding and structural types.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-06",
+    "mode": "G",
+    "question": "Inspect actual Alpha exports across available locales for delimiters, quoting, multiline fields, decimal separators and units.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-07",
+    "mode": "G",
+    "question": "Determine whether export fields describe performed, planned or recommended sets and identify set categories.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-08",
+    "mode": "G",
+    "question": "Inspect actual export fields for exercise identity, equipment, order, session IDs, set indices and RIR.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-09",
+    "mode": "G",
+    "question": "Compare actual examples of reps, load, assistance, duration and distance exercise modes and their units.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-10",
+    "mode": "G",
+    "question": "Determine whether displayed/exported load is total, per-hand, added bodyweight or assistance.",
+    "route": "guided-semantics",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-11",
+    "mode": "G",
+    "question": "Compare one completed workout across Alpha UI, CSV and Health Connect and identify missing fields.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-12",
+    "mode": "G",
+    "question": "Inspect actual export timezone/precision and compare midnight, DST and multiple-session behavior locally.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-13",
+    "mode": "G",
+    "question": "Export the same history twice and compare identities, ordering and structural/content fingerprints locally.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-14",
+    "mode": "G/W",
+    "question": "With an approved real edit/deletion, re-export and inspect correction, snapshot and Health Connect update behavior.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-15",
+    "mode": "G",
+    "question": "Investigate authorized unattended export or API access; identify when a manual export remains necessary.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-16",
+    "mode": "G",
+    "question": "If desired, test Alpha offline/sign-in behavior and whether exports include locally stored history.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-17",
+    "mode": "G",
+    "question": "Inspect presence and representation of notes, RIR, rest, actual/target volume and custom exercises without uploading note contents.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-18",
+    "mode": "G",
+    "question": "Compare exercise renames, collisions, aliases and languages with actual Garmin exercise identities.",
+    "route": "guided-mapping",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-19",
+    "mode": "G",
+    "question": "Inspect Alpha's system share/document-provider options and whether the probe can select its export.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "AP-20",
+    "mode": "G",
+    "question": "Compare selected Alpha fields across UI, CSV and Health Connect and record supported, missing and blocked stages.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-01",
+    "mode": "G",
+    "question": "Select an actual Garmin strength FIT export and inspect message definitions, set fields and timing locally.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-02",
+    "mode": "G",
+    "question": "Inspect fields present in an actual Garmin strength export, including vendor/developer fields and unknown definitions.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-05",
+    "mode": "G/W",
+    "question": "With separate approval, import one real completed Alpha workout through an authorized Garmin interface.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-06",
+    "mode": "G",
+    "question": "Inspect imported Garmin strength activity fields: exercises, order, reps, load, rest, duration and summary.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-07",
+    "mode": "G",
+    "question": "Re-export an imported Garmin activity and compare submitted and retained fields locally.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-08",
+    "mode": "G",
+    "question": "Observe whether Garmin sends an imported activity to the watch.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-09",
+    "mode": "G",
+    "question": "Compare actual Alpha exercise names with Garmin catalog entries, including custom and multilingual names.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-10",
+    "mode": "G",
+    "question": "Inspect retained semantics for assistance, per-hand load, bodyweight, timed sets, RIR and supersets.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-11",
+    "mode": "G",
+    "question": "Compare a watch-recorded and Alpha-recorded example of the same session for overlap and duplicate identity.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-12",
+    "mode": "G",
+    "question": "Investigate whether an authorized non-destructive interface can associate sets with an existing Garmin activity.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-13",
+    "mode": "G/W",
+    "question": "If separately approved, import a replacement test activity without modifying the original and inspect duplication and field loss.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-14",
+    "mode": "G/W",
+    "question": "After manual import is understood, test an established authorized upload route with separate write approval.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-15",
+    "mode": "G/W",
+    "question": "With approval for each real write, repeat a source/import case and inspect Garmin duplicate/conflict behavior.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-16",
+    "mode": "G/W",
+    "question": "With an approved real case, inspect backdated/timezone/session-edit handling and set chronology.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-17",
+    "mode": "G",
+    "question": "Observe imported activity effects on Garmin training metrics, records and Health Connect re-export.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-19",
+    "mode": "G",
+    "question": "Inspect Garmin interface/session requirements, refresh and MFA using an established authorized route.",
+    "route": "protocol",
+    "optional": true,
+    "account_write": false,
+    "implementation": "automatic_partial",
+    "prerequisite": "Select known vendor endpoint; GET/HEAD/OPTIONS without credentials. Observe status/challenge/methods. Expired vendor tokens, refresh and MFA require an established authorized vendor auth route.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GS-20",
+    "mode": "G",
+    "question": "For selected strength fields, observe submission, retention, display, re-export and watch receipt as separate stages.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-01",
+    "mode": "G",
+    "question": "Select an actual Alpha plan export and inspect routine, exercise, set-target, rest and identity fields.",
+    "route": "artifact",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_selected_file",
+    "prerequisite": "Export from the actual source app and choose CSV/FIT. Parser reports structural fields, counts and CRC; semantic comparisons require owner observations.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-02",
+    "mode": "G",
+    "question": "Compare an exported plan with Alpha's displayed next session and identify adaptive targets that are missing.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-03",
+    "mode": "G",
+    "question": "Inspect Garmin's actual workout catalog and a manually created example to compare exercise identities and target fields.",
+    "route": "guided-mapping",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-05",
+    "mode": "G",
+    "question": "Investigate authorized Garmin planned-workout import routes and their authentication requirements.",
+    "route": "research",
+    "optional": true,
+    "account_write": false,
+    "implementation": "research_or_follow_up",
+    "prerequisite": "Read the full question and inspect official documentation or phone evidence. Not automatically executed by this APK; record exact observations using the guided stage controls.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-06",
+    "mode": "G/W",
+    "question": "With separate approval, create one disposable Garmin strength workout and inspect retained identities and targets.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-07",
+    "mode": "G",
+    "question": "Send the approved workout to the watch and inspect sequence, targets and startability.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-08",
+    "mode": "G/W",
+    "question": "With separate approval, update the same test workout and inspect duplication, retention and device propagation.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "GW-09",
+    "mode": "G",
+    "question": "Compare a selected plan field across acquisition, mapping, Garmin retention and watch execution.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-01",
+    "mode": "G",
+    "question": "Trace one real Hume scan through its displayed fields and Health Connect representation.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-02",
+    "mode": "G",
+    "question": "Compare a selected Hume field with submitted FIT fields and actual Garmin retention/display/readback.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-03",
+    "mode": "G/W",
+    "question": "With separate approval, import one real Hume measurement and inspect Garmin readback.",
+    "route": "guided",
+    "optional": false,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-04",
+    "mode": "G",
+    "question": "Inspect origins and identities of Garmin re-exported measurements to identify possible repeated-import loops.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-06",
+    "mode": "G",
+    "question": "Exercise offline, permission, restart and session-expiry recovery and inspect observation preservation and delivery.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-07",
+    "mode": "G",
+    "question": "Compare source and destination field definitions and record uncertainty instead of assuming semantic equivalence.",
+    "route": "guided",
+    "optional": false,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-08",
+    "mode": "G",
+    "question": "Compare exercise, reps and load separately across an actual Alpha workout, Health Connect and CSV export.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-09",
+    "mode": "G/W",
+    "question": "With separate approval, import a real Alpha workout into Garmin and inspect its actual FIT re-export.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-10",
+    "mode": "G",
+    "question": "Compare overlapping Alpha/watch recordings and investigate association options without modifying the original.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-11",
+    "mode": "G",
+    "question": "Compare repeated real exports/reads to determine whether available IDs and fingerprints distinguish duplicates and corrections.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-14",
+    "mode": "G",
+    "question": "Inspect an Alpha next-session export and compare prescribed sets and exercise identities with Garmin's representation.",
+    "route": "guided",
+    "optional": true,
+    "account_write": false,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  },
+  {
+    "id": "E2E-15",
+    "mode": "G/W",
+    "question": "With separate approval, create a planned Garmin workout from a real Alpha plan and inspect watch receipt and execution.",
+    "route": "guided",
+    "optional": true,
+    "account_write": true,
+    "implementation": "owner_action",
+    "prerequisite": "Perform the full question's specific experiment in the target app; record attribute, units and observed stage. Write cases require separate approval; none is executed by this APK.",
+    "observations": [
+      "target/interface",
+      "case/attempt",
+      "operation/stage",
+      "status/reason",
+      "attribute/unit/presence or protocol outcome"
+    ],
+    "execution_status": "NOT_EXECUTED"
+  }
+]

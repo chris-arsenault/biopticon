@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:biopticon:probe:status-event:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "run_id", "attempt_id", "build", "campaign", "probe_id", "case_id", "target", "operation", "occurred_at", "status", "reason_code", "duration_ms", "findings"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_id": {"type": "string", "format": "uuid"},
+    "run_id": {"type": "string", "format": "uuid"},
+    "attempt_id": {"type": "string", "format": "uuid"},
+    "build": {"$ref": "#/$defs/label"},
+    "campaign": {"$ref": "#/$defs/label"},
+    "probe_id": {"$ref": "#/$defs/label"},
+    "case_id": {"$ref": "#/$defs/label"},
+    "target": {"$ref": "#/$defs/label"},
+    "operation": {"$ref": "#/$defs/label"},
+    "occurred_at": {"type": "string", "format": "date-time", "maxLength": 40, "pattern": "Z$"},
+    "status": {"enum": ["PASS", "FAIL", "BLOCKED_PERMISSION", "BLOCKED_AUTH", "NO_DATA", "UNSUPPORTED", "INCONCLUSIVE", "SKIPPED", "STARTED", "FINISHED", "INTERRUPTED"]},
+    "reason_code": {"$ref": "#/$defs/label"},
+    "duration_ms": {"type": "integer", "minimum": 0},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+  },
+  "$defs": {
+    "label": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$"},
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": {"enum": ["attribute", "protocol", "permission", "counter", "capability", "error", "metadata"]},
+        "name": {"type": "string", "minLength": 1, "maxLength": 160, "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$"},
+        "text": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$"},
+        "count": {"type": "integer", "minimum": 0},
+        "flag": {"type": "boolean"}
+      },
+      "oneOf": [{"required": ["text"]}, {"required": ["count"]}, {"required": ["flag"]}]
+    }
+  }
+}

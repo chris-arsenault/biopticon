@@ -1,0 +1,31 @@
+# discovery-1
+
+The APK packages the 123 current questions from [questions.md](questions.md), with stable IDs referring back to the original research where useful. Each entry names the available route, current implementation boundary, prerequisites and observation fields. `NOT_EXECUTED` is catalog metadata, never a claim of a phone outcome. Routes marked `automatic_partial` cover the mechanisms described in their prerequisites; other parts of the question remain open. R/G/W labels describe investigation actions, not permission to run a write. Recording a note requires no approval claim and triggers no vendor operation.
+
+## Executable cases
+
+| Route | Cases and budget | Observations / stopping condition |
+|---|---|---|
+| Inventory | One platform pass; visible launcher packages; three share MIME types; 15-second case deadline | SDK/model family/locale/zone, visible versions, handler counts. Android package visibility limits the inventory. |
+| Health reads | Seven body types; ten optional activity types; 7/30-day windows × page sizes 1/25/100; at most four pages/query and 20 seconds/query | Permission, count, pages, limit, origin, getter name/type/access/presence, metadata presence. Optional 91-day query only when history granted. Per-origin queries cover up to three observed origins. Empty readable types yield NO_DATA. |
+| History/background | Separate permission grants; campaign records whether its UI was visible | A completed WorkManager task alone does not establish background read capability. Inspect read outcomes together with the background-context observation. |
+| Changes/snapshots | Type-specific token from prior campaign; bounded changes page; bounded read-window fingerprints retained locally | Changes count/expired/more flag. Snapshot new/missing/changed identity counts contain no raw identifiers. Window movement, pagination limits and edits can all change a snapshot. |
+| Aggregate | Seven-day steps, at most four raw pages and one aggregate call, 20 seconds | Presence and raw/aggregate equality; no actual step total sent. Truncated raw pages make comparison inconclusive. |
+| Selected export | Owner chooses one CSV/FIT, at most 2 MB | Field/message definitions, headers, row counts/widths, CRC. Semantic units and source/destination comparisons require the guided question and actual exports. |
+| Bluetooth | Explicit owner opt-in; 12-second scan, at most 40 peripherals; selected device service discovery, 15 seconds | Random scan aliases, UUIDs, properties, manufacturer type/length. Device address/name stays local. No pairing, writes, notifications or automatic connection to nearby devices. |
+| Protocol | Owner-selected known HTTPS endpoint; GET/HEAD/OPTIONS, 10-second connect/read deadlines; no credentials/redirect following | Method, host, status, challenge scheme and allowed methods. HTTP response observation is not authentication success. Vendor refresh/expiry needs a known authorized auth implementation. |
+| Guided | Full question → named attribute/unit → observed stage/result | Source display, export, authentication, acceptance, storage, destination display, readback and device receipt are separate stages. Owner observations identify their method; no write is triggered by recording one. |
+
+Room commits related findings together as one outgoing event. Larger observations split only at the serialized 4 KiB limit, retaining case and attempt IDs; all groups are committed in one local transaction. A run-start event is committed with its run row; a run-finish event is committed with its final state. A dead-process run is marked interrupted on the next automatic campaign, without interrupting live runs in this process. Previously committed messages survive, including across the upgrade removing account binding. A new campaign repeats read-only discovery; automatic resume of uncertain account writes is absent.
+
+CI runs the format self-tests: 32 FIT field/byte-order/sentinel combinations checked by the independent Garmin SDK decoder, 32 seeded malformed FIT cases and 48 seeded CSV dialect cases, plus field-level boundary tests. These produce no phone observations or S3 objects. The shared format library remains available for actual target experiments.
+
+## Explicit first-pass prerequisites
+
+Hume field crosswalks need owner field inventory and source-origin evidence; an empty Health Connect window cannot establish that a field is impossible to obtain. Bluetooth characteristic reads need the actual selected scale's UUID/property observations before choosing safe requests. A documented or owner-authorized Hume cloud route is needed before a direct adapter; the unrelated Hume AI API is not such a route.
+
+Garmin SSO/token lifecycle, import, retained-field and display questions need the owner's actual authorized interface/account and, for mutations, approval of the exact real measurement or workout. This APK records manual transport/retention/display/readback observations; it does not implement a guessed private upload or SSO endpoint. Re-export actual files for structural inspection. Planned Workout and completed Activity are distinct message/file families; optional Alpha conversion/import experiments depend on actual export semantics and observed Garmin paths.
+
+Exercise route grants, local per-value source/destination comparison, full Hume latency schedules, elevation/session joins, stale-token rescan/dedup and authenticated vendor error cases are follow-up experiments requiring focused inputs or additional code. They are not reported as passed by the broad read sweep. The question catalog exposes these questions rather than manufacturing unavailable-interface findings. Research routes need official documentation and/or phone evidence; selecting their question does not execute a cloud adapter.
+
+AWS infrastructure and build checks belong to CI and deployed verification, not the packaged phone questionnaire. Status delivery uses normal platform authentication; results are read with existing AWS access. Local Rust tests exercise authentication, event validation, fixed storage keys and idempotency; deployed ALB, IAM, WAF, Cognito, S3 and real phone interruption/retry checks remain necessary. P2 stays open until actual observations have been inspected.

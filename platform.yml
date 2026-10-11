@@ -1,0 +1,11 @@
+project: biopticon
+prefix: biopticon
+# Android uses the repository CI job because shared CI pins Gradle 8.9/JDK 17.
+stack: [rust, terraform]
+android:
+  dir: android
+  ci_task: ':apps:probe:assembleDebug :apps:probe:lintDebug :apps:probe:testDebugUnitTest :packages:formats:test'
+  app_id: io.ahara.biopticon.probe
+rust_artifacts:
+  lambdas:
+    - biopticon-probe
